@@ -1,4 +1,5 @@
 import { trackGateHit } from '@/services/analytics';
+import { trinetraMarketingAbsUrl } from '@/config/trinetra-marketing';
 
 let bannerEl: HTMLElement | null = null;
 
@@ -31,16 +32,17 @@ export function showProBanner(container: HTMLElement): void {
   if (bannerEl) return;
   if (window.self !== window.top) return;
 
-  trackGateHit('pro-banner');
+  trackGateHit('trinetra-about-banner');
 
   const banner = document.createElement('div');
   banner.className = 'pro-banner';
+  const aboutHref = trinetraMarketingAbsUrl('/about.html');
   banner.innerHTML = `
-    <span class="pro-banner-badge">PRO</span>
+    <span class="pro-banner-badge">TRINETRA</span>
     <span class="pro-banner-text">
-      <strong>Pro is coming</strong> — More Signal, Less Noise. More AI Briefings. A Geopolitical &amp; Equity Researcher just for you.
+      <strong>Who we are</strong> — Mission, leadership, and how we build autonomous cyber defense intelligence.
     </span>
-    <a class="pro-banner-cta" href="/pro">Reserve your spot →</a>
+    <a class="pro-banner-cta" href="${aboutHref}">About us →</a>
   `;
 
   /* TODO: re-enable close button after pro launch promotion period

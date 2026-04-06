@@ -5,7 +5,7 @@
  * - Lazy-initializes the Dodo Payments overlay SDK
  * - Creates checkout sessions via the Convex createCheckout action
  * - Opens the overlay with dark-theme styling matching the dashboard
- * - Stores pending checkout intents for /pro handoff flows
+ * - Stores pending checkout intents for pricing / return URL handoff flows
  * - Handles overlay events (success, error, close)
  *
  * UI code calls startCheckout(productId) -- everything else is internal.
@@ -15,6 +15,7 @@ import * as Sentry from '@sentry/browser';
 import { DodoPayments } from 'dodopayments-checkout';
 import type { CheckoutEvent } from 'dodopayments-checkout';
 import { getCurrentClerkUser, getClerkToken } from './clerk';
+import { trinetraMarketingAbsUrl } from '@/config/trinetra-marketing';
 
 const CHECKOUT_PRODUCT_PARAM = 'checkoutProduct';
 const CHECKOUT_REFERRAL_PARAM = 'checkoutReferral';
@@ -215,7 +216,7 @@ let _checkoutInFlight = false;
  *
  * Creates a checkout session via the /api/create-checkout edge endpoint
  * (which relays to Convex). Returns true if the overlay opened successfully.
- * Falls back to /pro page on any failure.
+ * Falls back to the TRINETRA about page on any failure.
  */
 export async function startCheckout(
   productId: string,
@@ -227,7 +228,7 @@ export async function startCheckout(
 
   const user = getCurrentClerkUser();
   if (!user) {
-    if (fallbackToPricingPage) window.open('/pro', '_blank');
+    if (fallbackToPricingPage) window.open(trinetraMarketingAbsUrl('/about.html'), '_blank');
     return false;
   }
 
@@ -239,7 +240,7 @@ export async function startCheckout(
       token = await getClerkToken();
     }
     if (!token) {
-      if (fallbackToPricingPage) window.open('/pro', '_blank');
+      if (fallbackToPricingPage) window.open(trinetraMarketingAbsUrl('/about.html'), '_blank');
       return false;
     }
 
@@ -258,7 +259,7 @@ export async function startCheckout(
     if (!resp.ok) {
       const err = await resp.json().catch(() => ({}));
       console.error('[checkout] Edge endpoint error:', resp.status, err);
-      if (fallbackToPricingPage) window.open('/pro', '_blank');
+      if (fallbackToPricingPage) window.open(trinetraMarketingAbsUrl('/about.html'), '_blank');
       return false;
     }
 
@@ -271,7 +272,7 @@ export async function startCheckout(
   } catch (err) {
     console.error('[checkout] Failed to create checkout session:', err);
     Sentry.captureException(err, { tags: { component: 'dodo-checkout', action: 'createCheckout' }, extra: { productId } });
-    if (fallbackToPricingPage) window.open('/pro', '_blank');
+    if (fallbackToPricingPage) window.open(trinetraMarketingAbsUrl('/about.html'), '_blank');
     return false;
   } finally {
     _checkoutInFlight = false;

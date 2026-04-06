@@ -167,7 +167,6 @@ describe('Product ID guard', () => {
       `| grep -v 'api/_product-fallback-prices' ` +
       `| grep -v 'src/config/products.generated' ` +
       `| grep -v 'pro-test/src/generated/' ` +
-      `| grep -v 'public/pro/' ` +
       `| grep -v 'tests/' ` +
       `| grep -v 'convex/__tests__/' ` +
       `| grep -v 'scripts/generate-product-config' ` +

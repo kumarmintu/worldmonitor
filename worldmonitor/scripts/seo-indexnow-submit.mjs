@@ -12,10 +12,25 @@ const KEY = 'a7f3e9d1b2c44e8f9a0b1c2d3e4f5a6b';
 
 const BATCHES = [
   {
+    host: 'worldmonitor-sigma-flax.vercel.app',
+    urls: [
+      'https://worldmonitor-sigma-flax.vercel.app/',
+      'https://worldmonitor-sigma-flax.vercel.app/about.html',
+    ],
+  },
+  {
+    host: 'steady-cannoli-edb9f6.netlify.app',
+    urls: [
+      'https://steady-cannoli-edb9f6.netlify.app/',
+      'https://steady-cannoli-edb9f6.netlify.app/about.html',
+      'https://steady-cannoli-edb9f6.netlify.app/deck.html',
+    ],
+  },
+  {
     host: 'www.worldmonitor.app',
     urls: [
       'https://www.worldmonitor.app/',
-      'https://www.worldmonitor.app/pro',
+      'https://www.worldmonitor.app/about.html',
       'https://www.worldmonitor.app/blog/',
       'https://www.worldmonitor.app/blog/posts/what-is-worldmonitor-real-time-global-intelligence/',
       'https://www.worldmonitor.app/blog/posts/five-dashboards-one-platform-worldmonitor-variants/',

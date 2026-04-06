@@ -179,9 +179,24 @@
       padding: 0.75rem 1rem;
       border-radius: 0.5rem;
     }
+    #trinetra-intro-overlay {
+      transition: opacity 0.55s ease;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #trinetra-intro-overlay {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body class="bg-background text-on-surface font-body selection:bg-primary/30 selection:text-primary overflow-x-hidden antialiased">
+  <!-- Place opening.mp4 in the site root (next to index.html) for the fullscreen intro, or change the <source> src. -->
+  <div id="trinetra-intro-overlay" class="fixed inset-0 z-[10000] bg-black" role="dialog" aria-modal="true" aria-label="TRINETRA intro">
+    <video id="trinetra-intro-video" class="absolute inset-0 h-full w-full object-cover" playsinline muted autoplay preload="auto">
+      <source src="opening.mp4" type="video/mp4" />
+    </video>
+    <button type="button" data-skip-intro class="absolute right-5 top-5 z-10 rounded-full border border-white/30 bg-black/55 px-5 py-2.5 font-headline text-[10px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-colors hover:bg-white/15">Skip</button>
+  </div>
   <div class="noise" aria-hidden="true"></div>
   <a href="#main" class="skip-link bg-primary text-on-primary font-headline text-sm font-semibold">Skip to content</a>
 
@@ -197,6 +212,7 @@
       </a>
 
       <div class="hidden lg:flex items-center gap-10">
+        <a class="font-headline text-xs uppercase tracking-[0.2em] text-on-surface/55 hover:text-primary transition-colors" href="about.html">About</a>
         <a class="font-headline text-xs uppercase tracking-[0.2em] text-primary border-b border-primary pb-0.5" href="#capabilities">Capabilities</a>
         <a class="font-headline text-xs uppercase tracking-[0.2em] text-on-surface/55 hover:text-primary transition-colors" href="#dashboard">Operations</a>
         <a class="font-headline text-xs uppercase tracking-[0.2em] text-on-surface/55 hover:text-primary transition-colors" href="#nets">Architecture</a>
@@ -217,6 +233,7 @@
       </div>
     </div>
     <div id="mobile-menu" class="hidden lg:hidden border-t border-outline-variant/10 bg-background/95 backdrop-blur-xl px-5 py-6 space-y-4">
+      <a class="block font-headline text-sm uppercase tracking-widest text-on-surface/70" href="about.html">About</a>
       <a class="block font-headline text-sm uppercase tracking-widest text-primary" href="#capabilities">Capabilities</a>
       <a class="block font-headline text-sm uppercase tracking-widest text-on-surface/70" href="#dashboard">Operations</a>
       <a class="block font-headline text-sm uppercase tracking-widest text-on-surface/70" href="#nets">Architecture</a>
@@ -328,7 +345,7 @@
             <p class="text-on-surface-variant leading-relaxed">
               Live global picture powered by open-source
               <a class="text-primary underline decoration-primary/30 hover:decoration-primary" href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener noreferrer">World Monitor</a>
-              (<abbr title="GNU Affero General Public License version 3" class="cursor-help no-underline">AGPL-3.0</abbr>). <strong class="text-on-surface/90 font-medium">worldmonitor.app cannot be iframed</strong> on our domain—it sets <span class="font-mono text-[11px] text-primary/80">X-Frame-Options: SAMEORIGIN</span> and a strict <span class="font-mono text-[11px] text-primary/80">frame-ancestors</span> list—so we show a preview here and open the real app on a dedicated TRINETRA deck page. Clone: <code class="text-xs px-1.5 py-0.5 rounded bg-surface-container-high font-mono text-primary/90">./worldmonitor</code>.
+              (<abbr title="GNU Affero General Public License version 3" class="cursor-help no-underline">AGPL-3.0</abbr>). The live TRINETRA deck at <span class="font-mono text-[11px] text-primary/80">worldmonitor-sigma-flax.vercel.app</span> uses strict framing rules (<span class="font-mono text-[11px] text-primary/80">X-Frame-Options</span> / <span class="font-mono text-[11px] text-primary/80">frame-ancestors</span>), so we show a preview here and open the real app full screen from the deck page. Clone: <code class="text-xs px-1.5 py-0.5 rounded bg-surface-container-high font-mono text-primary/90">./worldmonitor</code>.
             </p>
           </div>
           <div class="flex flex-wrap gap-2">
@@ -336,7 +353,7 @@
               <span class="material-symbols-outlined text-[18px]">open_in_full</span>
               Open deck page
             </a>
-            <a href="https://www.worldmonitor.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2.5 rounded-xl border border-outline-variant/25 text-on-surface-variant text-[10px] font-headline font-bold uppercase tracking-widest hover:text-primary hover:border-primary/30 transition-colors">worldmonitor.app</a>
+            <a href="https://worldmonitor-sigma-flax.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2.5 rounded-xl border border-outline-variant/25 text-on-surface-variant text-[10px] font-headline font-bold uppercase tracking-widest hover:text-primary hover:border-primary/30 transition-colors">Live deck</a>
             <a href="deck.html?local=1" class="inline-flex items-center px-4 py-2.5 rounded-xl border border-outline-variant/25 bg-surface-container-high/80 text-primary text-[10px] font-headline font-bold uppercase tracking-widest hover:border-secondary/40 transition-colors">Local embed</a>
           </div>
         </div>
@@ -359,7 +376,7 @@
           </div>
           <a href="deck.html" class="group relative block w-full aspect-[16/10] min-h-[320px] sm:min-h-[420px] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background">
             <img
-              src="https://www.worldmonitor.app/favico/og-image.png"
+              src="https://worldmonitor-sigma-flax.vercel.app/favico/og-image.png"
               alt=""
               width="1200"
               height="630"
@@ -381,7 +398,7 @@
           </a>
           <div class="px-4 sm:px-5 py-3.5 bg-surface-container-low border-t border-outline-variant/15 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-[10px] font-mono text-on-surface-variant/65 uppercase tracking-wider">
             <span>Upstream: <a class="text-primary/90 hover:text-primary no-underline hover:underline" href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener noreferrer">koala73/worldmonitor</a> — AGPL-3.0 / commercial terms from maintainer.</span>
-            <span class="text-on-surface-variant/45 normal-case tracking-normal">Preview image from worldmonitor.app · Live app only via <a class="text-primary/90 hover:underline" href="deck.html">deck.html</a> or direct URL.</span>
+            <span class="text-on-surface-variant/45 normal-case tracking-normal">Preview from TRINETRA deck · Open via <a class="text-primary/90 hover:underline" href="deck.html">deck.html</a> or <a class="text-primary/90 hover:underline" href="https://worldmonitor-sigma-flax.vercel.app/" target="_blank" rel="noopener noreferrer">live URL</a>.</span>
           </div>
         </div>
 
@@ -604,6 +621,7 @@
         <p class="text-on-surface-variant/50 font-mono text-[10px] uppercase tracking-widest text-center lg:text-left">System status: vigilant · Trinetra Intel</p>
       </div>
       <nav class="flex flex-wrap justify-center gap-8 lg:gap-10" aria-label="Footer">
+        <a class="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant/50 hover:text-secondary transition-colors" href="about.html">About</a>
         <a class="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant/50 hover:text-secondary transition-colors" href="#">Documentation</a>
         <a class="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant/50 hover:text-secondary transition-colors" href="#">API access</a>
         <a class="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant/50 hover:text-secondary transition-colors" href="#">Secure login</a>
@@ -620,6 +638,49 @@
 
   <script>
     (function () {
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var intro = document.getElementById("trinetra-intro-overlay");
+      if (intro && !reduceMotion) {
+        var dismissed = false;
+        function dismissIntro() {
+          if (dismissed) return;
+          dismissed = true;
+          document.body.classList.remove("overflow-hidden");
+          intro.style.opacity = "0";
+          intro.style.pointerEvents = "none";
+          setTimeout(function () {
+            intro.remove();
+          }, 560);
+        }
+        document.body.classList.add("overflow-hidden");
+        var vid = document.getElementById("trinetra-intro-video");
+        var skipBtn = intro.querySelector("[data-skip-intro]");
+        if (skipBtn) skipBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          dismissIntro();
+        });
+        document.addEventListener("keydown", function onEsc(e) {
+          if (e.key === "Escape") {
+            document.removeEventListener("keydown", onEsc);
+            dismissIntro();
+          }
+        });
+        if (vid) {
+          vid.addEventListener("ended", dismissIntro);
+          vid.addEventListener("error", function () {
+            setTimeout(dismissIntro, 200);
+          });
+          var pp = vid.play();
+          if (pp && pp.catch) pp.catch(function () {
+            dismissIntro();
+          });
+        } else {
+          dismissIntro();
+        }
+      } else if (intro) {
+        intro.remove();
+      }
+
       var bar = document.getElementById("scroll-progress");
       function onScroll() {
         var h = document.documentElement;

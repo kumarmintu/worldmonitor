@@ -1,4 +1,5 @@
 import { DEFAULT_UPGRADE_PRODUCT } from '@/config/products';
+import { trinetraMarketingAbsUrl } from '@/config/trinetra-marketing';
 import { type AuthSession, getAuthState, subscribeAuthState } from '@/services/auth-state';
 import { openSignIn } from '@/services/clerk';
 import { PanelGateReason, getPanelGateReason } from '@/services/panel-gating';
@@ -195,8 +196,8 @@ export class ResilienceWidget {
   private renderLocked(gateReason: PanelGateReason): HTMLElement {
     const description = gateReason === PanelGateReason.ANONYMOUS
       ? 'Sign in to unlock premium resilience scores.'
-      : 'Upgrade to Pro to unlock resilience scores.';
-    const cta = gateReason === PanelGateReason.ANONYMOUS ? 'Sign In' : 'Upgrade to Pro';
+      : 'Get full access to unlock resilience scores.';
+    const cta = gateReason === PanelGateReason.ANONYMOUS ? 'Sign In' : 'Get full access';
 
     const preview = this.renderScoreCard(LOCKED_PREVIEW, true);
     preview.classList.add('resilience-widget__preview');
@@ -344,16 +345,17 @@ export class ResilienceWidget {
   }
 
   private openUpgradeFlow(): void {
+    const aboutUrl = trinetraMarketingAbsUrl('/about.html');
     if (isDesktopRuntime()) {
-      void invokeTauri<void>('open_url', { url: '/pro' })
-        .catch(() => window.open('/pro', '_blank'));
+      void invokeTauri<void>('open_url', { url: aboutUrl })
+        .catch(() => window.open(aboutUrl, '_blank'));
       return;
     }
 
     import('@/services/checkout')
       .then((module) => module.startCheckout(DEFAULT_UPGRADE_PRODUCT))
       .catch(() => {
-        window.open('/pro', '_blank');
+        window.open(aboutUrl, '_blank');
       });
   }
 }

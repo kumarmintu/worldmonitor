@@ -6,6 +6,7 @@ import { trackPanelResized } from '@/services/analytics';
 import { getAiFlowSettings } from '@/services/ai-flow-settings';
 import { getSecretState } from '@/services/runtime-config';
 import { PanelGateReason } from '@/services/panel-gating';
+import { trinetraMarketingAbsUrl } from '@/config/trinetra-marketing';
 
 export interface PanelOptions {
   id: string;
@@ -844,13 +845,14 @@ export class Panel {
       lockedChildren.push(featureList);
     }
 
-    const ctaBtn = h('button', { type: 'button', className: 'panel-locked-cta' }, 'Upgrade to Pro');
+    const ctaBtn = h('button', { type: 'button', className: 'panel-locked-cta' }, 'Get full access');
+    const aboutUrl = trinetraMarketingAbsUrl('/about.html');
     if (isDesktopRuntime()) {
-      ctaBtn.addEventListener('click', () => void invokeTauri<void>('open_url', { url: '/pro' }).catch(() => window.open('/pro', '_blank')));
+      ctaBtn.addEventListener('click', () => void invokeTauri<void>('open_url', { url: aboutUrl }).catch(() => window.open(aboutUrl, '_blank')));
     } else {
       ctaBtn.addEventListener('click', () => {
         import('@/services/checkout').then(m => import('@/config/products').then(p => m.startCheckout(p.DEFAULT_UPGRADE_PRODUCT))).catch(() => {
-          window.open('/pro', '_blank');
+          window.open(aboutUrl, '_blank');
         });
       });
     }

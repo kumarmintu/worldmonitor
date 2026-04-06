@@ -18,7 +18,7 @@ export const VARIANT_META: { full: VariantMeta; [k: string]: VariantMeta } = {
       'TRINETRA situational intelligence: live news, markets, military tracking, infrastructure, and geopolitical data in one deck. Powered by the open-source World Monitor engine (AGPL-3.0).',
     keywords:
       'TRINETRA, global intelligence, geopolitical dashboard, OSINT, situational awareness, threat monitoring, markets, military tracking, AIS, ADS-B, World Monitor',
-    url: 'https://www.worldmonitor.app/',
+    url: 'https://worldmonitor-sigma-flax.vercel.app/',
     siteName: 'TRINETRA',
     shortName: 'TRINETRA',
     subject: 'Situational Intelligence Deck',

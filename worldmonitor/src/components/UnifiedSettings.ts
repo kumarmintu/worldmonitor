@@ -12,6 +12,7 @@ import { getAuthState } from '@/services/auth-state';
 import { track } from '@/services/analytics';
 import { isEntitled } from '@/services/entitlements';
 import { getSubscription, openBillingPortal } from '@/services/billing';
+import { trinetraMarketingAbsUrl } from '@/config/trinetra-marketing';
 
 function showToast(msg: string): void {
   document.querySelector('.toast-notification')?.remove();
@@ -122,7 +123,7 @@ export class UnifiedSettings {
       const panelItem = target.closest<HTMLElement>('.panel-toggle-item');
       if (panelItem?.dataset.panel) {
         if (panelItem.dataset.proLocked) {
-          window.open('/pro', '_blank');
+          window.open(trinetraMarketingAbsUrl('/about.html'), '_blank');
           return;
         }
         this.toggleDraftPanel(panelItem.dataset.panel);
@@ -352,9 +353,9 @@ export class UnifiedSettings {
 
     return `
       <div class="upgrade-pro-section">
-        <div class="upgrade-pro-title">Upgrade to Pro</div>
+        <div class="upgrade-pro-title">Get full access</div>
         <div class="upgrade-pro-desc">Unlock all panels, AI analysis, and priority data refresh.</div>
-        <button class="upgrade-pro-cta">Upgrade to Pro</button>
+        <button class="upgrade-pro-cta">Get full access</button>
       </div>
     `;
   }
@@ -362,11 +363,11 @@ export class UnifiedSettings {
   private handleUpgradeClick(): void {
     this.close();
     if (this.config.isDesktopApp) {
-      window.open('/pro', '_blank');
+      window.open(trinetraMarketingAbsUrl('/about.html'), '_blank');
       return;
     }
     import('@/services/checkout').then(m => import('@/config/products').then(p => m.startCheckout(p.DEFAULT_UPGRADE_PRODUCT))).catch(() => {
-      window.open('/pro', '_blank');
+      window.open(trinetraMarketingAbsUrl('/about.html'), '_blank');
     });
   }
 

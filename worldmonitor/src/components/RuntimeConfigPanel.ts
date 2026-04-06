@@ -22,6 +22,7 @@ import { fetchOllamaModels as fetchOllamaModelsFromService } from '@/services/ol
 import { t } from '@/services/i18n';
 import { trackFeatureToggle } from '@/services/analytics';
 import { SIGNUP_URLS, PLAINTEXT_KEYS, MASKED_SENTINEL } from '@/services/settings-constants';
+import { trinetraMarketingAbsUrl } from '@/config/trinetra-marketing';
 
 interface RuntimeConfigPanelOptions {
   mode?: 'full' | 'alert';
@@ -370,7 +371,7 @@ export class RuntimeConfigPanel extends Panel {
 
     if (this.mode === 'alert') {
       this.content.querySelector<HTMLButtonElement>('[data-early-access]')?.addEventListener('click', () => {
-        const url = 'https://www.worldmonitor.app/pro';
+        const url = trinetraMarketingAbsUrl('/about.html');
         if (isDesktopRuntime()) {
           void invokeTauri<void>('open_url', { url }).catch(() => window.open(url, '_blank'));
         } else {

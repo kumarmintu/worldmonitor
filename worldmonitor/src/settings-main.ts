@@ -28,6 +28,7 @@ import {
 } from '@/services/runtime-config';
 import { getApiBaseUrl, isDesktopRuntime, resolveLocalApiPort, startSmartPollLoop, type SmartPollLoopHandle } from '@/services/runtime';
 import { tryInvokeTauri, invokeTauri } from '@/services/tauri-bridge';
+import { trinetraMarketingAbsUrl } from '@/config/trinetra-marketing';
 import { escapeHtml } from '@/utils/sanitize';
 import { initI18n, t } from '@/services/i18n';
 import { applyStoredTheme } from '@/utils/theme-manager';
@@ -239,7 +240,7 @@ function renderOverview(area: HTMLElement): void {
         <h2 class="wm-section-title">${t('modals.settingsWindow.worldMonitor.register.title')}</h2>
         <p class="wm-section-desc">${t('modals.settingsWindow.worldMonitor.register.description')}</p>
         <div class="wm-register-row">
-          <button type="button" class="wm-submit-btn" data-wm-open-pro>
+          <button type="button" class="wm-submit-btn" data-wm-open-about>
             ${t('modals.settingsWindow.worldMonitor.register.submitBtn')}
           </button>
         </div>
@@ -263,8 +264,8 @@ function initOverviewListeners(area: HTMLElement): void {
     }
   });
 
-  area.querySelector('[data-wm-open-pro]')?.addEventListener('click', () => {
-    const url = '/pro';
+  area.querySelector('[data-wm-open-about]')?.addEventListener('click', () => {
+    const url = trinetraMarketingAbsUrl('/about.html');
     void invokeTauri<void>('open_url', { url }).catch(() => window.open(url, '_blank'));
   });
 
