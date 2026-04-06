@@ -1,0 +1,15 @@
+.DS_Store
+*.log
+
+# Secrets (never commit)
+.env
+.env.local
+.env.*.local
+worldmonitor/.env
+worldmonitor/.env.local
+worldmonitor/docker-compose.override.yml
+
+# Dependencies & build output
+worldmonitor/node_modules/
+worldmonitor/dist/
+worldmonitor/public/blog/

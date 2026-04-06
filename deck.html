@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="TRINETRA intelligence deck — launch World Monitor full screen or local build." />
+  <title>TRINETRA — Intelligence deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            background: "#0a0a0b",
+            primary: "#ccf6ff",
+            "primary-container": "#75e2f5",
+            "on-primary": "#00363d",
+            secondary: "#e0b6ff",
+            "surface-container": "#141416",
+            "surface-container-high": "#2a2a2a",
+            "on-surface": "#e5e2e1",
+            "on-surface-variant": "#9ca8aa",
+            "outline-variant": "#3d494b",
+          },
+          fontFamily: {
+            headline: ["Space Grotesk", "system-ui", "sans-serif"],
+            body: ["Inter", "system-ui", "sans-serif"],
+            mono: ["IBM Plex Mono", "monospace"],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased min-h-[100dvh] flex flex-col">
+  <header class="shrink-0 border-b border-outline-variant/20 bg-background/90 backdrop-blur-md z-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2 text-primary font-headline font-bold text-lg tracking-tight hover:opacity-90 transition-opacity">
+        <span class="material-symbols-outlined text-xl">arrow_back</span>
+        TRINETRA
+      </a>
+      <div class="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">
+        <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+        Intelligence deck
+      </div>
+    </div>
+  </header>
+
+  <!-- Local embed: full viewport minus header (worldmonitor.app blocks remote iframes; local Vite usually does not) -->
+  <div id="local-mode" class="hidden flex-1 flex flex-col min-h-0 bg-black">
+    <div class="shrink-0 px-4 py-2 bg-surface-container-high/90 border-b border-outline-variant/20 flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono text-on-surface-variant">
+      <span>Embedding <code class="text-primary/90">http://127.0.0.1:5173</code> — run <code class="text-secondary/90">npm run dev</code> in <code>./worldmonitor</code></span>
+      <a href="index.html#dashboard" class="text-primary hover:underline uppercase tracking-wider">Main site</a>
+    </div>
+    <iframe
+      id="local-iframe"
+      title="TRINETRA local intelligence deck"
+      class="flex-1 w-full border-0 min-h-[70vh]"
+      src="http://127.0.0.1:5173/"
+    ></iframe>
+  </div>
+
+  <!-- Default: launch cloud app (same tab = true full screen) -->
+  <main id="launch-mode" class="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-12 sm:py-16">
+    <div class="max-w-lg w-full text-center space-y-8">
+      <div class="space-y-3">
+        <h1 class="text-3xl sm:text-4xl font-headline font-bold text-primary tracking-tight">Open the live deck</h1>
+        <p class="text-on-surface-variant text-sm leading-relaxed">
+          <a href="https://www.worldmonitor.app/" class="text-primary underline decoration-primary/30 hover:decoration-primary" target="_blank" rel="noopener noreferrer">worldmonitor.app</a>
+          sends <span class="font-mono text-xs text-on-surface/80">X-Frame-Options: SAMEORIGIN</span> and a strict <span class="font-mono text-xs text-on-surface/80">frame-ancestors</span> policy, so it <strong class="text-on-surface font-medium">cannot be embedded</strong> on trinetra or any other external site. Use this page to jump in full screen.
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a
+          href="https://www.worldmonitor.app/"
+          class="inline-flex justify-center items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold text-xs uppercase tracking-[0.2em] shadow-[0_8px_32px_rgba(117,226,245,0.25)] hover:brightness-110 transition-all"
+        >
+          <span class="material-symbols-outlined text-[22px]">open_in_full</span>
+          Launch full screen (this tab)
+        </a>
+        <a
+          href="https://www.worldmonitor.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex justify-center items-center gap-2 px-8 py-4 rounded-2xl border border-outline-variant/30 text-primary font-headline font-bold text-xs uppercase tracking-[0.2em] hover:border-primary/50 hover:bg-surface-container/50 transition-all"
+        >
+          <span class="material-symbols-outlined text-[22px]">open_in_new</span>
+          New tab
+        </a>
+      </div>
+      <p class="text-[11px] text-on-surface-variant/70 font-mono">
+        Powered by <a href="https://github.com/koala73/worldmonitor" class="text-secondary hover:underline" target="_blank" rel="noopener noreferrer">World Monitor</a> (AGPL-3.0). Commercial use needs a separate license from upstream.
+      </p>
+      <div class="pt-4 border-t border-outline-variant/15">
+        <p class="text-xs text-on-surface-variant mb-3">Self-hosted preview (embed allowed on your machine)</p>
+        <a
+          href="deck.html?local=1"
+          class="inline-flex items-center gap-2 text-sm text-primary font-headline font-semibold hover:underline"
+        >
+          <span class="material-symbols-outlined text-lg">terminal</span>
+          Open local embed (<code class="font-mono text-xs font-normal">?local=1</code>)
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      try {
+        if (new URLSearchParams(location.search).get("local") === "1") {
+          document.getElementById("launch-mode").classList.add("hidden");
+          document.getElementById("local-mode").classList.remove("hidden");
+          document.getElementById("local-mode").classList.add("flex");
+        }
+      } catch (e) {}
+    })();
+  </script>
+</body>
+</html>

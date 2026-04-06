@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TRINETRA — autonomous cyber defense intelligence. VAPT, brand protection, and live threat visibility." />
+  <title>TRINETRA — The Vigilant Lens</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container-high": "#2a2a2a",
+            error: "#ffb4ab",
+            "on-primary": "#00363d",
+            "on-secondary-container": "#d7a4ff",
+            background: "#0a0a0b",
+            "surface-container-lowest": "#060607",
+            "secondary-fixed": "#f2daff",
+            "tertiary-fixed": "#ffdad5",
+            "secondary-container": "#6d11ad",
+            "outline-variant": "#3d494b",
+            "on-tertiary": "#690003",
+            "on-error-container": "#ffdad6",
+            "surface-container-highest": "#353534",
+            "secondary-fixed-dim": "#e0b6ff",
+            "surface-variant": "#2c2c2d",
+            "primary-fixed-dim": "#68d6e8",
+            "surface-container": "#141416",
+            "primary-fixed": "#9cefff",
+            "on-secondary": "#4c007d",
+            "on-primary-container": "#006470",
+            outline: "#879395",
+            "surface-container-low": "#0f0f10",
+            "on-tertiary-fixed-variant": "#930005",
+            primary: "#ccf6ff",
+            surface: "#0a0a0b",
+            secondary: "#e0b6ff",
+            "on-background": "#e5e2e1",
+            "tertiary-container": "#ffc5bd",
+            "on-surface": "#e5e2e1",
+            "surface-dim": "#0a0a0b",
+            "inverse-surface": "#e5e2e1",
+            "tertiary-fixed-dim": "#ffb4aa",
+            "on-primary-fixed": "#001f24",
+            "surface-bright": "#3a3939",
+            "surface-tint": "#68d6e8",
+            "on-error": "#690005",
+            "inverse-on-surface": "#313030",
+            tertiary: "#ffebe8",
+            "primary-container": "#75e2f5",
+            "error-container": "#93000a",
+            "on-tertiary-container": "#b90009",
+            "on-secondary-fixed": "#2e004e",
+            "on-surface-variant": "#9ca8aa",
+            "on-secondary-fixed-variant": "#6a0baa",
+            "inverse-primary": "#006875",
+            "on-tertiary-fixed": "#410001",
+            "on-primary-fixed-variant": "#004f59",
+          },
+          borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", "2xl": "1rem", full: "0.75rem" },
+          fontFamily: {
+            headline: ["Space Grotesk", "system-ui", "sans-serif"],
+            body: ["Inter", "system-ui", "sans-serif"],
+            mono: ["IBM Plex Mono", "ui-monospace", "monospace"],
+          },
+          animation: {
+            "fade-up": "fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards",
+            "pulse-slow": "pulseGlow 4s ease-in-out infinite",
+            "float": "float 6s ease-in-out infinite",
+          },
+          keyframes: {
+            fadeUp: {
+              "0%": { opacity: "0", transform: "translateY(24px)" },
+              "100%": { opacity: "1", transform: "translateY(0)" },
+            },
+            pulseGlow: {
+              "0%, 100%": { opacity: "0.4" },
+              "50%": { opacity: "0.85" },
+            },
+            float: {
+              "0%, 100%": { transform: "translateY(0)" },
+              "50%": { transform: "translateY(-8px)" },
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+    .glass-panel {
+      background: linear-gradient(135deg, rgba(42, 42, 44, 0.55) 0%, rgba(20, 20, 22, 0.4) 100%);
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    }
+    .scanline {
+      background: linear-gradient(90deg, transparent, rgba(204, 246, 255, 0.35), transparent);
+      opacity: 0.25;
+    }
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(61, 73, 75, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(61, 73, 75, 0.12) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .mesh-hero {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(104, 214, 232, 0.22), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 50%, rgba(224, 182, 255, 0.12), transparent),
+        radial-gradient(ellipse 50% 30% at 0% 80%, rgba(117, 226, 245, 0.08), transparent);
+    }
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.035;
+      z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero-title span {
+      display: inline-block;
+      animation: letterIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
+    .hero-title span:nth-child(1) { animation-delay: 0.05s; }
+    .hero-title span:nth-child(2) { animation-delay: 0.1s; }
+    .hero-title span:nth-child(3) { animation-delay: 0.15s; }
+    .hero-title span:nth-child(4) { animation-delay: 0.2s; }
+    .hero-title span:nth-child(5) { animation-delay: 0.25s; }
+    .hero-title span:nth-child(6) { animation-delay: 0.3s; }
+    .hero-title span:nth-child(7) { animation-delay: 0.35s; }
+    .hero-title span:nth-child(8) { animation-delay: 0.4s; }
+    @keyframes letterIn {
+      from { opacity: 0; transform: translateY(0.4em) rotateX(-20deg); }
+      to { opacity: 1; transform: translateY(0) rotateX(0); }
+    }
+    #scroll-progress {
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+    .skip-link {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+    .skip-link:focus {
+      position: fixed;
+      width: auto;
+      height: auto;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      z-index: 200;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 selection:text-primary overflow-x-hidden antialiased">
+  <div class="noise" aria-hidden="true"></div>
+  <a href="#main" class="skip-link bg-primary text-on-primary font-headline text-sm font-semibold">Skip to content</a>
+
+  <div id="scroll-progress" class="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary via-primary-container to-secondary z-[100] shadow-[0_0_12px_rgba(204,246,255,0.5)]"></div>
+
+  <nav class="fixed top-0 w-full z-50 border-b border-outline-variant/10 bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/50" aria-label="Primary">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-5 sm:px-8 py-4">
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="relative h-9 w-9 rounded-lg overflow-hidden ring-1 ring-primary/20 group-hover:ring-primary/50 transition-shadow">
+          <img alt="" class="h-full w-full object-cover opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9bQ9RT50voY8c-6FQ8uV746yawFL-USRazk7Yp2T370_kWZ05nviul7NrAMQcbRpJOZMq03Kz8136RSzrZ2IoiRzT0pnNhEaI-tCWJKDW1duRJ1kfKyugEZaE1jsk1X13nZEZ-18YZqtD7Mb6rFSgg3J0f5ri7lTY-U8EmOkRbzxhJmduXwvYlDsXb-8w4FgX8OHJwuNXpaoRfZPxCgxT3EEyHOyH5lgJV9Odt8F0uOzFjkdIp9oVPTZN4g8utz1hOMs_INEnx6k" width="36" height="36" />
+        </div>
+        <span class="text-xl font-bold tracking-tight text-primary font-headline">TRINETRA</span>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-10">
+        <a class="font-headline text-xs uppercase tracking-[0.2em] text-primary border-b border-primary pb-0.5" href="#capabilities">Capabilities</a>
+        <a class="font-headline text-xs uppercase tracking-[0.2em] text-on-surface/55 hover:text-primary transition-colors" href="#dashboard">Operations</a>
+        <a class="font-headline text-xs uppercase tracking-[0.2em] text-on-surface/55 hover:text-primary transition-colors" href="#nets">Architecture</a>
+        <a class="font-headline text-xs uppercase tracking-[0.2em] text-on-surface/55 hover:text-primary transition-colors" href="#reach">Global</a>
+        <a class="font-headline text-xs uppercase tracking-[0.2em] text-on-surface/55 hover:text-primary transition-colors" href="#faq">FAQ</a>
+      </div>
+
+      <div class="flex items-center gap-3 sm:gap-5">
+        <div class="hidden sm:flex items-center gap-1 rounded-full border border-outline-variant/20 bg-surface-container/80 px-1 py-1">
+          <button type="button" class="material-symbols-outlined text-primary/80 hover:text-primary p-2 rounded-full hover:bg-primary/10 transition-colors text-[22px]" aria-label="Sensor status">sensors</button>
+          <button type="button" class="material-symbols-outlined text-primary/80 hover:text-primary p-2 rounded-full hover:bg-primary/10 transition-colors text-[22px]" aria-label="Open terminal view" data-scroll-to="terminal">terminal</button>
+          <button type="button" class="material-symbols-outlined text-primary/80 hover:text-primary p-2 rounded-full hover:bg-primary/10 transition-colors text-[22px]" aria-label="Notifications">notifications</button>
+        </div>
+        <a href="#contact" class="hidden sm:inline-flex font-headline text-[10px] uppercase tracking-[0.2em] px-4 py-2.5 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold hover:brightness-110 transition-all shadow-[0_0_24px_rgba(117,226,245,0.25)]">Brief us</a>
+        <button type="button" id="menu-btn" class="lg:hidden p-2 rounded-lg border border-outline-variant/20 text-primary" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <span class="material-symbols-outlined" id="menu-icon">menu</span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-outline-variant/10 bg-background/95 backdrop-blur-xl px-5 py-6 space-y-4">
+      <a class="block font-headline text-sm uppercase tracking-widest text-primary" href="#capabilities">Capabilities</a>
+      <a class="block font-headline text-sm uppercase tracking-widest text-on-surface/70" href="#dashboard">Operations</a>
+      <a class="block font-headline text-sm uppercase tracking-widest text-on-surface/70" href="#nets">Architecture</a>
+      <a class="block font-headline text-sm uppercase tracking-widest text-on-surface/70" href="#reach">Global</a>
+      <a class="block font-headline text-sm uppercase tracking-widest text-on-surface/70" href="#faq">FAQ</a>
+      <a class="block font-headline text-sm uppercase tracking-widest text-secondary" href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main id="main" class="relative z-0">
+    <section class="min-h-screen flex flex-col items-center justify-center relative px-5 sm:px-8 pt-28 pb-20 overflow-hidden">
+      <div class="absolute inset-0 mesh-hero z-0"></div>
+      <div class="absolute inset-0 z-0 grid-bg opacity-50"></div>
+      <div class="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,rgba(204,246,255,0.06)_0%,transparent_65%)]"></div>
+
+      <div class="relative z-10 text-center max-w-4xl mx-auto">
+        <div class="flex flex-col items-center gap-3 mb-8 opacity-0 animate-[fadeUp_0.8s_ease_forwards]" style="animation-delay: 0.1s">
+          <span class="text-primary/90 font-headline tracking-[0.35em] text-[10px] sm:text-xs uppercase">System online</span>
+          <div class="h-px w-32 bg-gradient-to-r from-transparent via-primary/80 to-transparent"></div>
+        </div>
+
+        <h1 class="hero-title text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-headline font-bold tracking-[-0.04em] text-on-surface mb-8 leading-[0.95]">
+          <span>T</span><span>R</span><span>I</span><span>N</span><span class="text-transparent bg-clip-text bg-gradient-to-b from-primary to-primary-container">E</span><span>T</span><span>R</span><span>A</span>
+        </h1>
+
+        <p class="text-on-surface-variant text-lg sm:text-xl md:text-2xl max-w-2xl mx-auto mb-4 font-light leading-relaxed opacity-0 animate-[fadeUp_0.8s_ease_forwards]" style="animation-delay: 0.35s">
+          The vigilant lens. Autonomous cyber defense intelligence engineered for <span class="text-secondary font-medium">total visibility</span> across your digital perimeter.
+        </p>
+        <p class="text-on-surface-variant/70 text-sm max-w-xl mx-auto mb-12 opacity-0 animate-[fadeUp_0.8s_ease_forwards]" style="animation-delay: 0.45s">
+          VAPT, brand protection, and investigations—unified in one operational plane with live telemetry you can act on.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center opacity-0 animate-[fadeUp_0.8s_ease_forwards]" style="animation-delay: 0.55s">
+          <a href="#contact" class="inline-flex justify-center px-8 py-4 rounded-2xl bg-gradient-to-br from-primary via-primary-fixed to-primary-container text-on-primary font-headline font-bold text-xs tracking-[0.2em] uppercase hover:brightness-110 transition-all shadow-[0_8px_32px_rgba(117,226,245,0.2)] relative overflow-hidden group">
+            <span class="relative z-10">Initialize engagement</span>
+            <span class="absolute inset-0 bg-white/15 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+          </a>
+          <a href="#dashboard" class="inline-flex justify-center px-8 py-4 rounded-2xl border border-outline-variant/25 bg-surface-container-high/60 text-primary font-headline font-bold text-xs tracking-[0.2em] uppercase hover:border-primary/40 hover:bg-surface-container-high transition-all backdrop-blur-sm">View operations deck</a>
+        </div>
+      </div>
+
+      <div class="absolute bottom-8 left-5 sm:left-10 font-mono text-[9px] sm:text-[10px] text-on-surface-variant/35 space-y-1.5 hidden sm:block">
+        <div>COORD · 40.7128° N, 74.0060° W</div>
+        <div>STATUS · <span class="text-primary/60">SCANNING_ACTIVE</span></div>
+        <div>PROTOCOL · LEVEL_09</div>
+      </div>
+
+      <div class="absolute bottom-8 right-5 sm:right-10 flex gap-6 text-on-surface-variant/30 text-[10px] font-mono uppercase tracking-widest hidden md:flex">
+        <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> SOC sync</span>
+        <span>v4.0.2</span>
+      </div>
+    </section>
+
+    <section class="border-y border-outline-variant/10 bg-surface-container-low/50 backdrop-blur-sm" aria-label="Highlights">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 py-10 grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+        <div class="reveal text-center lg:text-left">
+          <div class="font-headline text-3xl sm:text-4xl font-bold text-primary tabular-nums">348</div>
+          <div class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant mt-1">Active nodes</div>
+        </div>
+        <div class="reveal text-center lg:text-left">
+          <div class="font-headline text-3xl sm:text-4xl font-bold text-secondary tabular-nums">&lt;4ms</div>
+          <div class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant mt-1">Heuristic latency</div>
+        </div>
+        <div class="reveal text-center lg:text-left">
+          <div class="font-headline text-3xl sm:text-4xl font-bold text-on-surface tabular-nums">1.4k+</div>
+          <div class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant mt-1">Endpoints under scan</div>
+        </div>
+        <div class="reveal text-center lg:text-left">
+          <div class="font-headline text-3xl sm:text-4xl font-bold text-tertiary tabular-nums">24/7</div>
+          <div class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant mt-1">Live feed</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="capabilities" class="py-24 sm:py-32 px-5 sm:px-8 bg-background relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div class="max-w-7xl mx-auto relative">
+        <div class="max-w-2xl mb-16 reveal">
+          <p class="text-secondary font-headline text-[10px] uppercase tracking-[0.3em] mb-4">What we deliver</p>
+          <h2 class="text-4xl sm:text-5xl font-headline font-bold text-on-surface tracking-tight mb-4">Capabilities built for operators</h2>
+          <p class="text-on-surface-variant leading-relaxed">From continuous testing to takedowns and forensics—each module shares the same evidence chain and reporting fabric.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-5">
+          <article class="reveal group p-8 rounded-2xl border border-outline-variant/15 bg-surface-container-low/40 hover:border-primary/35 hover:bg-surface-container/60 transition-all duration-300">
+            <span class="material-symbols-outlined text-primary text-3xl mb-6">bug_report</span>
+            <h3 class="font-headline font-bold text-lg mb-3 tracking-tight">VAPT &amp; red team</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Continuous vulnerability assessment, safe exploitation paths, and executive-ready risk narratives.</p>
+          </article>
+          <article class="reveal group p-8 rounded-2xl border border-outline-variant/15 bg-surface-container-low/40 hover:border-secondary/35 hover:bg-surface-container/60 transition-all duration-300" style="transition-delay: 50ms">
+            <span class="material-symbols-outlined text-secondary text-3xl mb-6">gpp_maybe</span>
+            <h3 class="font-headline font-bold text-lg mb-3 tracking-tight">Brand protection</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Domain abuse, phishing kits, and credential leaks—monitored, prioritized, and escalated with legal-ready artifacts.</p>
+          </article>
+          <article class="reveal group p-8 rounded-2xl border border-outline-variant/15 bg-surface-container-low/40 hover:border-tertiary/30 hover:bg-surface-container/60 transition-all duration-300" style="transition-delay: 100ms">
+            <span class="material-symbols-outlined text-tertiary text-3xl mb-6">policy</span>
+            <h3 class="font-headline font-bold text-lg mb-3 tracking-tight">Investigations</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Deep traces across infrastructure and identity—structured timelines your counsel and insurers can follow.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard" class="py-24 sm:py-32 px-5 sm:px-8 bg-surface-container-lowest relative scroll-mt-24">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-10 reveal">
+          <div class="space-y-4 max-w-2xl">
+            <p class="text-secondary font-headline text-[10px] uppercase tracking-[0.3em]">Situational intelligence</p>
+            <h2 class="text-4xl sm:text-5xl font-headline font-bold text-primary tracking-tight">TRINETRA operations deck</h2>
+            <p class="text-on-surface-variant leading-relaxed">
+              Live global picture powered by open-source
+              <a class="text-primary underline decoration-primary/30 hover:decoration-primary" href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener noreferrer">World Monitor</a>
+              (<abbr title="GNU Affero General Public License version 3" class="cursor-help no-underline">AGPL-3.0</abbr>). <strong class="text-on-surface/90 font-medium">worldmonitor.app cannot be iframed</strong> on our domain—it sets <span class="font-mono text-[11px] text-primary/80">X-Frame-Options: SAMEORIGIN</span> and a strict <span class="font-mono text-[11px] text-primary/80">frame-ancestors</span> list—so we show a preview here and open the real app on a dedicated TRINETRA deck page. Clone: <code class="text-xs px-1.5 py-0.5 rounded bg-surface-container-high font-mono text-primary/90">./worldmonitor</code>.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <a href="deck.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-on-primary text-[10px] font-headline font-bold uppercase tracking-widest shadow-lg shadow-primary/15 hover:brightness-110 transition-all">
+              <span class="material-symbols-outlined text-[18px]">open_in_full</span>
+              Open deck page
+            </a>
+            <a href="https://www.worldmonitor.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2.5 rounded-xl border border-outline-variant/25 text-on-surface-variant text-[10px] font-headline font-bold uppercase tracking-widest hover:text-primary hover:border-primary/30 transition-colors">worldmonitor.app</a>
+            <a href="deck.html?local=1" class="inline-flex items-center px-4 py-2.5 rounded-xl border border-outline-variant/25 bg-surface-container-high/80 text-primary text-[10px] font-headline font-bold uppercase tracking-widest hover:border-secondary/40 transition-colors">Local embed</a>
+          </div>
+        </div>
+
+        <div class="reveal rounded-2xl overflow-hidden border border-outline-variant/20 bg-[#050506] shadow-[0_32px_100px_rgba(0,0,0,0.55)] ring-1 ring-primary/15" id="intel-deck-shell">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 sm:px-5 py-3.5 bg-gradient-to-r from-surface-container-high via-surface-container to-surface-container-high border-b border-outline-variant/20">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="font-headline font-bold text-lg text-primary tracking-tight shrink-0">TRINETRA</span>
+              <span class="h-4 w-px bg-outline-variant/30 shrink-0" aria-hidden="true"></span>
+              <span class="font-mono text-[10px] sm:text-[11px] text-on-surface-variant uppercase tracking-[0.15em] truncate">Deck preview · tap to open full screen</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="flex gap-1.5" aria-hidden="true">
+                <span class="w-2 h-2 rounded-full bg-error/50"></span>
+                <span class="w-2 h-2 rounded-full bg-primary/50"></span>
+                <span class="w-2 h-2 rounded-full bg-on-surface-variant/35"></span>
+              </div>
+              <span class="material-symbols-outlined text-on-surface-variant/45 text-lg">preview</span>
+            </div>
+          </div>
+          <a href="deck.html" class="group relative block w-full aspect-[16/10] min-h-[320px] sm:min-h-[420px] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+            <img
+              src="https://www.worldmonitor.app/favico/og-image.png"
+              alt=""
+              width="1200"
+              height="630"
+              class="absolute inset-0 w-full h-full object-cover object-center opacity-90 group-hover:opacity-100 transition-opacity"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/20 group-hover:via-background/30 transition-colors"></div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
+              <span class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/15 border border-primary/30 text-primary group-hover:bg-primary/25 group-hover:scale-105 transition-all shadow-[0_0_40px_rgba(204,246,255,0.15)]">
+                <span class="material-symbols-outlined text-4xl" aria-hidden="true">open_in_full</span>
+              </span>
+              <div>
+                <span class="block font-headline font-bold text-lg sm:text-xl text-on-surface tracking-tight">View intelligence deck</span>
+                <span class="block text-xs sm:text-sm text-on-surface-variant mt-1 max-w-sm mx-auto">Opens TRINETRA deck page — then launch World Monitor full screen</span>
+              </div>
+              <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-primary/80 border border-primary/25 rounded-full px-3 py-1 bg-background/60 backdrop-blur-sm">Click anywhere</span>
+            </div>
+          </a>
+          <div class="px-4 sm:px-5 py-3.5 bg-surface-container-low border-t border-outline-variant/15 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-[10px] font-mono text-on-surface-variant/65 uppercase tracking-wider">
+            <span>Upstream: <a class="text-primary/90 hover:text-primary no-underline hover:underline" href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener noreferrer">koala73/worldmonitor</a> — AGPL-3.0 / commercial terms from maintainer.</span>
+            <span class="text-on-surface-variant/45 normal-case tracking-normal">Preview image from worldmonitor.app · Live app only via <a class="text-primary/90 hover:underline" href="deck.html">deck.html</a> or direct URL.</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+          <div class="glass-panel p-5 rounded-xl border border-outline-variant/15 reveal flex items-start gap-4">
+            <span class="material-symbols-outlined text-primary text-2xl shrink-0">security</span>
+            <div>
+              <h3 class="font-headline font-bold text-sm mb-1 tracking-tight">VAPT module</h3>
+              <p class="text-[11px] text-on-surface-variant leading-relaxed">Continuous assessment signals feed the same command channel.</p>
+            </div>
+          </div>
+          <div class="glass-panel p-5 rounded-xl border border-outline-variant/15 reveal flex items-start gap-4">
+            <span class="material-symbols-outlined text-secondary text-2xl shrink-0">verified_user</span>
+            <div>
+              <h3 class="font-headline font-bold text-sm mb-1 tracking-tight">Brand protection</h3>
+              <p class="text-[11px] text-on-surface-variant leading-relaxed">Domain and impersonation queues stay linked to the deck.</p>
+            </div>
+          </div>
+          <div class="glass-panel p-5 rounded-xl border border-outline-variant/15 reveal flex items-start gap-4">
+            <span class="material-symbols-outlined text-tertiary text-2xl shrink-0">manage_search</span>
+            <div>
+              <h3 class="font-headline font-bold text-sm mb-1 tracking-tight">Investigations</h3>
+              <p class="text-[11px] text-on-surface-variant leading-relaxed">Escalations open with map and feed context attached.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="nets" class="py-24 sm:py-32 px-5 sm:px-8 overflow-hidden bg-background relative">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div class="relative order-2 lg:order-1 reveal">
+          <div class="absolute -top-20 -left-20 w-72 h-72 bg-secondary/10 blur-[100px] rounded-full pointer-events-none"></div>
+          <div class="relative rounded-2xl border border-outline-variant/20 overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.5)] ring-1 ring-white/5">
+            <img class="w-full aspect-[4/3] sm:aspect-square object-cover" alt="Abstract network visualization with glowing nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9VYCiFtl2nTY1PI1HL8GYVxjVILibYLAmo8IgsrWTgZh_zppU01k9ws39kRnN1BrTTXEtX0RNGLFZhME9fxeD_9es0IjJzo60bK8sRK0ZNJOnggslZveM2HmjXf-81f3YfoNixpPzbP0ACoEf8kp15nAiut2wKDYS4G6Jpxd4CQhxNA_rDV8XSrgAclcF4RVxGkEZW7Y3vNA7HwD1jvCfn5UOT_Uy5V3HTPmIU-Y2TKZYdQjB3G_TCncOdHU6bUpcAa_KusQTcSQ" width="800" height="800" />
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between gap-4">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 bg-secondary rounded-full shadow-[0_0_12px_#E0B6FF]"></div>
+                <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-on-surface/80">Core visualizer v4.0.2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-8 order-1 lg:order-2 reveal">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/25">
+            <span class="text-[10px] font-bold text-secondary uppercase tracking-[0.25em]">Trinetra core</span>
+          </div>
+          <h2 class="text-4xl sm:text-5xl font-headline font-extrabold tracking-tight text-on-surface">The three nets of intelligence</h2>
+          <p class="text-on-surface-variant leading-relaxed">Layered sensing that stays quiet until you need it loud—then it moves with evidence, not noise.</p>
+          <div class="space-y-8 pt-2">
+            <div class="group cursor-default border-l-2 border-primary/30 pl-6 hover:border-primary transition-colors">
+              <div class="flex items-center gap-4 mb-2">
+                <div class="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-sm font-headline font-bold text-primary group-hover:bg-primary group-hover:text-on-primary transition-all">01</div>
+                <h4 class="font-headline font-bold text-lg uppercase tracking-wide">Passive surveillance</h4>
+              </div>
+              <p class="text-on-surface-variant text-sm leading-relaxed ml-[3.25rem]">Non-intrusive metadata and signal fusion—mapping actors and infrastructure before impact.</p>
+            </div>
+            <div class="group cursor-default border-l-2 border-secondary/30 pl-6 hover:border-secondary transition-colors">
+              <div class="flex items-center gap-4 mb-2">
+                <div class="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center text-sm font-headline font-bold text-secondary group-hover:bg-secondary group-hover:text-on-secondary transition-all">02</div>
+                <h4 class="font-headline font-bold text-lg uppercase tracking-wide">Active counter-analysis</h4>
+              </div>
+              <p class="text-on-surface-variant text-sm leading-relaxed ml-[3.25rem]">Polymorphic decoys and honey-nodes to capture TTPs on zero-day attempts safely.</p>
+            </div>
+            <div class="group cursor-default border-l-2 border-tertiary/25 pl-6 hover:border-tertiary/60 transition-colors">
+              <div class="flex items-center gap-4 mb-2">
+                <div class="w-9 h-9 rounded-xl bg-tertiary/10 flex items-center justify-center text-sm font-headline font-bold text-tertiary group-hover:bg-tertiary group-hover:text-on-tertiary transition-all">03</div>
+                <h4 class="font-headline font-bold text-lg uppercase tracking-wide">Heuristic neutralization</h4>
+              </div>
+              <p class="text-on-surface-variant text-sm leading-relaxed ml-[3.25rem]">Automated remediation playbooks with human gates—speed without surrendering control.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reach" class="py-24 sm:py-32 bg-surface-container-low relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 text-center mb-14 reveal">
+        <h2 class="text-3xl sm:text-4xl font-headline font-bold mb-3 uppercase tracking-[0.2em] text-on-surface">Sentinel reach</h2>
+        <p class="text-on-surface-variant font-mono text-xs sm:text-sm uppercase tracking-widest opacity-70">Global distribution of neutralization nodes</p>
+      </div>
+      <div class="relative w-full max-w-6xl mx-auto px-5 sm:px-0 h-[min(70vh,640px)] border border-outline-variant/15 rounded-3xl overflow-hidden bg-gradient-to-b from-surface-container to-background shadow-inner">
+        <div class="absolute inset-0 opacity-30 grid-bg pointer-events-none"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+          <img alt="Stylized world map with network overlay" class="max-h-full w-auto opacity-40 grayscale invert brightness-125 contrast-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyTp3fWIZMZ7MIDZxo6B4UDdintwLu3Hwq6lmCXDrmdD_qhjed1dCrAY5O69aEvtp-Ko65dvM43mYGQwdLq-_zFskR_h_KHcuwEkP1ndI2R_8obXDj5KvCjTCyh8tCS1RREGk_YorQZX9PgGL6cE7RN9REXmg9uJzvbiQqwpuoeFpd_pSLAC2001nd8qRnXVZ5nY-6F9oi9ahm8XDVxcWFxeNUs9h9jN-JptTT53XZC-bNKy1KlPyG_oafgTwbHf0QL4VF7QWNHP8" width="1200" height="600" />
+        </div>
+        <div class="absolute top-[32%] left-[26%] group cursor-crosshair z-10">
+          <div class="relative w-3.5 h-3.5">
+            <div class="absolute inset-0 bg-primary rounded-full animate-ping opacity-60"></div>
+            <div class="absolute inset-0 bg-primary rounded-full shadow-[0_0_24px_#CCF6FF]"></div>
+          </div>
+          <div class="absolute top-8 left-0 bg-surface-container-high/95 border border-primary/35 p-3 rounded-xl text-[10px] font-mono whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-xl backdrop-blur-md pointer-events-none">
+            NODE: NORTH_ATLANTIC_1<br />STATUS: DEFENDING
+          </div>
+        </div>
+        <div class="absolute top-[48%] right-[34%] group cursor-crosshair z-10">
+          <div class="relative w-3.5 h-3.5">
+            <div class="absolute inset-0 bg-secondary rounded-full animate-ping opacity-60"></div>
+            <div class="absolute inset-0 bg-secondary rounded-full shadow-[0_0_24px_#E0B6FF]"></div>
+          </div>
+          <div class="absolute top-8 left-0 bg-surface-container-high/95 border border-secondary/35 p-3 rounded-xl text-[10px] font-mono whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-xl backdrop-blur-md pointer-events-none">
+            NODE: SINGAPORE_CLUSTER<br />STATUS: SCANNING
+          </div>
+        </div>
+        <div class="absolute top-6 left-6 sm:top-8 sm:left-8 space-y-3 text-left reveal">
+          <div class="flex items-center gap-3">
+            <span class="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_#CCF6FF]"></span>
+            <span class="text-[10px] uppercase font-bold tracking-[0.2em]">348 active nodes</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-1.5 h-1.5 bg-secondary rounded-full shadow-[0_0_8px_#E0B6FF]"></span>
+            <span class="text-[10px] uppercase font-bold tracking-[0.2em]">12 analytic clusters</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="terminal" class="py-24 sm:py-32 px-5 sm:px-8 bg-surface-container-lowest scroll-mt-24">
+      <div class="max-w-3xl mx-auto reveal">
+        <p class="text-center text-on-surface-variant text-sm mb-8 font-mono uppercase tracking-widest opacity-60">Intel terminal</p>
+        <div class="rounded-2xl overflow-hidden border border-outline-variant/25 bg-[#050506] shadow-[0_32px_100px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.04]">
+          <div class="bg-surface-container-high px-4 py-3.5 flex items-center justify-between border-b border-outline-variant/20">
+            <div class="flex gap-2">
+              <div class="w-3 h-3 rounded-full bg-error/50"></div>
+              <div class="w-3 h-3 rounded-full bg-primary/50"></div>
+              <div class="w-3 h-3 rounded-full bg-on-surface-variant/35"></div>
+            </div>
+            <div class="text-[10px] font-mono text-on-surface-variant/55 uppercase tracking-[0.2em]">trinetra-root-terminal — v4.0.2</div>
+            <span class="material-symbols-outlined text-sm text-on-surface-variant/40">lock</span>
+          </div>
+          <div class="p-6 sm:p-10 font-mono text-xs sm:text-sm leading-relaxed text-primary/95 space-y-3 min-h-[360px]" id="terminal-body" aria-live="polite">
+            <div class="flex gap-2"><span class="text-on-surface-variant/45">$</span> trinetra --init --mode vigilant</div>
+            <div class="text-secondary/90">&gt;&gt; Loading TRINETRA CORE [####################] 100%</div>
+            <div>&gt;&gt; SYSCALL: ALL_NETRA_MODULES_ONLINE</div>
+            <div>&gt;&gt; HEURISTICS: ACTIVE</div>
+            <div>&gt;&gt; VAPT_SCAN: COMPLETED · 0 critical · 2 minor</div>
+            <div class="text-on-surface-variant/45 pt-4">// Monitoring traffic in real time…</div>
+            <div class="flex gap-2 items-center pt-2">
+              <span class="text-on-surface-variant/45">$</span>
+              <span class="w-2 h-4 bg-primary animate-pulse rounded-sm" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="py-24 sm:py-32 px-5 sm:px-8 bg-background border-t border-outline-variant/10">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-14 reveal">
+          <h2 class="text-3xl sm:text-4xl font-headline font-bold tracking-tight mb-3">Questions operators ask</h2>
+          <p class="text-on-surface-variant text-sm">Straight answers—no black-box theater.</p>
+        </div>
+        <div class="space-y-3">
+          <details class="group glass-panel rounded-2xl border border-outline-variant/15 open:border-primary/25 transition-colors reveal">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-headline font-semibold text-sm sm:text-base">
+              How do you handle sensitive data?
+              <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            </summary>
+            <div class="px-6 pb-5 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/10 pt-4">
+              Segregated environments, least-privilege access, and cryptographically signed handoffs. You choose retention windows and export formats aligned to your compliance regime.
+            </div>
+          </details>
+          <details class="group glass-panel rounded-2xl border border-outline-variant/15 open:border-primary/25 transition-colors reveal">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-headline font-semibold text-sm sm:text-base">
+              Can TRINETRA sit beside our existing SOC?
+              <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            </summary>
+            <div class="px-6 pb-5 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/10 pt-4">
+              Yes—webhooks, SIEM forwarding, and ticket bi-directional sync. We surface findings where your analysts already work.
+            </div>
+          </details>
+          <details class="group glass-panel rounded-2xl border border-outline-variant/15 open:border-primary/25 transition-colors reveal">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-headline font-semibold text-sm sm:text-base">
+              What does “live feed” include?
+              <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+            </summary>
+            <div class="px-6 pb-5 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/10 pt-4">
+              High-signal events, node health, and investigation deltas—not raw firehose noise. Filters and severity routing are yours to tune.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-24 sm:py-32 px-5 sm:px-8 relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-primary/[0.07] via-transparent to-secondary/[0.06] pointer-events-none"></div>
+      <div class="max-w-4xl mx-auto relative rounded-3xl border border-outline-variant/20 bg-surface-container-low/80 backdrop-blur-xl p-10 sm:p-14 shadow-[0_24px_80px_rgba(0,0,0,0.35)] reveal">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl sm:text-4xl font-headline font-bold tracking-tight mb-3">Initialize a secure brief</h2>
+          <p class="text-on-surface-variant text-sm max-w-lg mx-auto">Share context—scope, assets, and urgency. We respond from a verified channel within one business day.</p>
+        </div>
+        <form class="space-y-5 max-w-md mx-auto" action="#" method="post" onsubmit="event.preventDefault(); document.getElementById('form-toast').classList.remove('hidden');">
+          <div>
+            <label for="email" class="block text-[10px] uppercase tracking-widest text-on-surface-variant mb-2">Work email</label>
+            <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@organization.com" class="w-full rounded-xl border-outline-variant/25 bg-background/80 text-on-surface placeholder:text-on-surface-variant/40 focus:border-primary/50 focus:ring-primary/20" />
+          </div>
+          <div>
+            <label for="org" class="block text-[10px] uppercase tracking-widest text-on-surface-variant mb-2">Organization</label>
+            <input id="org" name="org" type="text" autocomplete="organization" placeholder="Company or unit" class="w-full rounded-xl border-outline-variant/25 bg-background/80 text-on-surface placeholder:text-on-surface-variant/40 focus:border-primary/50 focus:ring-primary/20" />
+          </div>
+          <div>
+            <label for="note" class="block text-[10px] uppercase tracking-widest text-on-surface-variant mb-2">Mission note</label>
+            <textarea id="note" name="note" rows="4" placeholder="Goals, timelines, constraints…" class="w-full rounded-xl border-outline-variant/25 bg-background/80 text-on-surface placeholder:text-on-surface-variant/40 focus:border-primary/50 focus:ring-primary/20 resize-y min-h-[100px]"></textarea>
+          </div>
+          <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold text-xs uppercase tracking-[0.2em] hover:brightness-110 transition-all shadow-[0_8px_32px_rgba(117,226,245,0.2)]">Transmit brief</button>
+          <p id="form-toast" class="hidden text-center text-sm text-secondary font-mono" role="status">Brief queued — connect backend to deliver.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-surface-container-lowest w-full py-14 border-t border-outline-variant/15">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col lg:flex-row justify-between items-center gap-10">
+      <div class="flex flex-col items-center lg:items-start gap-3">
+        <div class="flex items-center gap-3">
+          <span class="text-primary font-bold font-headline text-xl tracking-tight">TRINETRA</span>
+          <span class="px-2.5 py-1 rounded-lg bg-primary/10 text-primary text-[9px] font-bold tracking-widest uppercase border border-primary/20">v4.0.2</span>
+        </div>
+        <p class="text-on-surface-variant/50 font-mono text-[10px] uppercase tracking-widest text-center lg:text-left">System status: vigilant · Trinetra Intel</p>
+      </div>
+      <nav class="flex flex-wrap justify-center gap-8 lg:gap-10" aria-label="Footer">
+        <a class="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant/50 hover:text-secondary transition-colors" href="#">Documentation</a>
+        <a class="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant/50 hover:text-secondary transition-colors" href="#">API access</a>
+        <a class="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant/50 hover:text-secondary transition-colors" href="#">Secure login</a>
+        <a class="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant/50 hover:text-secondary transition-colors" href="#contact">Contact</a>
+      </nav>
+      <div class="flex items-center gap-5 text-on-surface-variant/30">
+        <span class="material-symbols-outlined text-xl hover:text-primary transition-colors cursor-default" aria-hidden="true">public</span>
+        <span class="material-symbols-outlined text-xl hover:text-primary transition-colors cursor-default" aria-hidden="true">shield</span>
+        <span class="material-symbols-outlined text-xl hover:text-primary transition-colors cursor-default" aria-hidden="true">token</span>
+      </div>
+    </div>
+    <p class="text-center text-on-surface-variant/30 text-[10px] font-mono mt-10 px-4">© <span id="year"></span> TRINETRA. Demonstration landing — replace imagery and forms for production.</p>
+  </footer>
+
+  <script>
+    (function () {
+      var bar = document.getElementById("scroll-progress");
+      function onScroll() {
+        var h = document.documentElement;
+        var scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
+        bar.style.transform = "scaleX(" + Math.min(1, Math.max(0, scrolled)) + ")";
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+
+      var btn = document.getElementById("menu-btn");
+      var menu = document.getElementById("mobile-menu");
+      var icon = document.getElementById("menu-icon");
+      if (btn && menu) {
+        btn.addEventListener("click", function () {
+          var isClosed = menu.classList.toggle("hidden");
+          btn.setAttribute("aria-expanded", (!isClosed).toString());
+          icon.textContent = isClosed ? "menu" : "close";
+        });
+        menu.querySelectorAll("a").forEach(function (a) {
+          a.addEventListener("click", function () {
+            menu.classList.add("hidden");
+            btn.setAttribute("aria-expanded", "false");
+            icon.textContent = "menu";
+          });
+        });
+      }
+
+      document.querySelectorAll("[data-scroll-to]").forEach(function (el) {
+        el.addEventListener("click", function () {
+          var id = el.getAttribute("data-scroll-to");
+          var t = document.getElementById(id);
+          if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      var y = document.getElementById("year");
+      if (y) y.textContent = new Date().getFullYear();
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+      );
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        observer.observe(el);
+      });
+    })();
+  </script>
+</body>
+</html>
