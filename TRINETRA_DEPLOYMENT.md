@@ -7,6 +7,14 @@ Upstream architecture and troubleshooting: `worldmonitor/SELF_HOSTING.md` and [W
 
 ---
 
+## Vercel (monorepo)
+
+Set **Root Directory** to `worldmonitor`. Upstream `vercel.json` used `ignoreCommand` + `scripts/vercel-ignore.sh`, which only watches paths like `src/` at the **repo root**; in this monorepo those paths are `worldmonitor/src/…`, so Vercel kept **canceling** deploys (“no web-relevant changes”). We removed `ignoreCommand` from `worldmonitor/vercel.json` and added a stub script that always opts **in** to building if your project still references it in the dashboard.
+
+If builds still skip, open Vercel → Project → **Settings → Git → Ignored Build Step** and set it to **Automatic** (or disable the custom command).
+
+---
+
 ## Phase 1 — Deck live on the internet (TRINETRA branding)
 
 The app in `worldmonitor/` is already rebranded for **TRINETRA** (title, PWA name, share text, noscript copy). Canonical and Open Graph URLs use **`VITE_TRINETRA_PUBLIC_URL`** at **build time** so they match **your** domain.
