@@ -10,6 +10,7 @@ interface Window {
 declare const __APP_VERSION__: string;
 
 interface ImportMetaEnv {
+  readonly DEV?: boolean;
   readonly VITE_SENTRY_DSN?: string;
   readonly VITE_WS_API_URL?: string;
   /** Your public HTTPS origin for canonical URLs / OG (no trailing slash), e.g. https://intel.example.com */

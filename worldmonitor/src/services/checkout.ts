@@ -227,7 +227,7 @@ export async function startCheckout(
 
   const user = getCurrentClerkUser();
   if (!user) {
-    if (fallbackToPricingPage) window.open('https://worldmonitor.app/pro', '_blank');
+    if (fallbackToPricingPage) window.open('/pro', '_blank');
     return false;
   }
 
@@ -239,7 +239,7 @@ export async function startCheckout(
       token = await getClerkToken();
     }
     if (!token) {
-      if (fallbackToPricingPage) window.open('https://worldmonitor.app/pro', '_blank');
+      if (fallbackToPricingPage) window.open('/pro', '_blank');
       return false;
     }
 
@@ -258,7 +258,7 @@ export async function startCheckout(
     if (!resp.ok) {
       const err = await resp.json().catch(() => ({}));
       console.error('[checkout] Edge endpoint error:', resp.status, err);
-      if (fallbackToPricingPage) window.open('https://worldmonitor.app/pro', '_blank');
+      if (fallbackToPricingPage) window.open('/pro', '_blank');
       return false;
     }
 
@@ -271,7 +271,7 @@ export async function startCheckout(
   } catch (err) {
     console.error('[checkout] Failed to create checkout session:', err);
     Sentry.captureException(err, { tags: { component: 'dodo-checkout', action: 'createCheckout' }, extra: { productId } });
-    if (fallbackToPricingPage) window.open('https://worldmonitor.app/pro', '_blank');
+    if (fallbackToPricingPage) window.open('/pro', '_blank');
     return false;
   } finally {
     _checkoutInFlight = false;
