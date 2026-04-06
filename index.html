@@ -192,7 +192,15 @@
 <body class="bg-background text-on-surface font-body selection:bg-primary/30 selection:text-primary overflow-x-hidden antialiased">
   <!-- Place opening.mp4 in the site root (next to index.html) for the fullscreen intro, or change the <source> src. -->
   <div id="trinetra-intro-overlay" class="fixed inset-0 z-[10000] bg-black" role="dialog" aria-modal="true" aria-label="TRINETRA intro">
-    <video id="trinetra-intro-video" class="absolute inset-0 h-full w-full object-cover" playsinline muted autoplay preload="auto">
+    <video
+      id="trinetra-intro-video"
+      class="absolute left-1/2 top-1/2 min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 object-cover"
+      playsinline
+      muted
+      autoplay
+      preload="auto"
+      src="opening.mp4"
+    >
       <source src="opening.mp4" type="video/mp4" />
     </video>
     <button type="button" data-skip-intro class="absolute right-5 top-5 z-10 rounded-full border border-white/30 bg-black/55 px-5 py-2.5 font-headline text-[10px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-colors hover:bg-white/15">Skip</button>
@@ -345,7 +353,7 @@
             <p class="text-on-surface-variant leading-relaxed">
               Live global picture powered by open-source
               <a class="text-primary underline decoration-primary/30 hover:decoration-primary" href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener noreferrer">World Monitor</a>
-              (<abbr title="GNU Affero General Public License version 3" class="cursor-help no-underline">AGPL-3.0</abbr>). The live TRINETRA deck at <span class="font-mono text-[11px] text-primary/80">worldmonitor-sigma-flax.vercel.app</span> uses strict framing rules (<span class="font-mono text-[11px] text-primary/80">X-Frame-Options</span> / <span class="font-mono text-[11px] text-primary/80">frame-ancestors</span>), so we show a preview here and open the real app full screen from the deck page. Clone: <code class="text-xs px-1.5 py-0.5 rounded bg-surface-container-high font-mono text-primary/90">./worldmonitor</code>.
+              (<abbr title="GNU Affero General Public License version 3" class="cursor-help no-underline">AGPL-3.0</abbr>). Below is the <strong class="text-on-surface/90 font-medium">hosted TRINETRA deck</strong> (live). Open full screen for the best experience. Clone: <code class="text-xs px-1.5 py-0.5 rounded bg-surface-container-high font-mono text-primary/90">./worldmonitor</code>.
             </p>
           </div>
           <div class="flex flex-wrap gap-2">
@@ -363,7 +371,7 @@
             <div class="flex items-center gap-3 min-w-0">
               <span class="font-headline font-bold text-lg text-primary tracking-tight shrink-0">TRINETRA</span>
               <span class="h-4 w-px bg-outline-variant/30 shrink-0" aria-hidden="true"></span>
-              <span class="font-mono text-[10px] sm:text-[11px] text-on-surface-variant uppercase tracking-[0.15em] truncate">Deck preview · tap to open full screen</span>
+              <span class="font-mono text-[10px] sm:text-[11px] text-on-surface-variant uppercase tracking-[0.15em] truncate">Live deck · embedded</span>
             </div>
             <div class="flex items-center gap-2">
               <div class="flex gap-1.5" aria-hidden="true">
@@ -374,31 +382,32 @@
               <span class="material-symbols-outlined text-on-surface-variant/45 text-lg">preview</span>
             </div>
           </div>
-          <a href="deck.html" class="group relative block w-full aspect-[16/10] min-h-[320px] sm:min-h-[420px] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background">
-            <img
-              src="https://worldmonitor-sigma-flax.vercel.app/favico/og-image.png"
-              alt=""
-              width="1200"
-              height="630"
-              class="absolute inset-0 w-full h-full object-cover object-center opacity-90 group-hover:opacity-100 transition-opacity"
+          <div class="relative aspect-[16/10] min-h-[280px] w-full sm:min-h-[420px] bg-[#050506]">
+            <iframe
+              src="https://worldmonitor-sigma-flax.vercel.app/"
+              title="TRINETRA intelligence deck (live)"
+              class="absolute inset-0 h-full w-full border-0"
               loading="lazy"
-              decoding="async"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/20 group-hover:via-background/30 transition-colors"></div>
-            <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
-              <span class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/15 border border-primary/30 text-primary group-hover:bg-primary/25 group-hover:scale-105 transition-all shadow-[0_0_40px_rgba(204,246,255,0.15)]">
-                <span class="material-symbols-outlined text-4xl" aria-hidden="true">open_in_full</span>
-              </span>
-              <div>
-                <span class="block font-headline font-bold text-lg sm:text-xl text-on-surface tracking-tight">View intelligence deck</span>
-                <span class="block text-xs sm:text-sm text-on-surface-variant mt-1 max-w-sm mx-auto">Opens TRINETRA deck page — then launch World Monitor full screen</span>
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="clipboard-write; fullscreen"
+            ></iframe>
+            <div class="pointer-events-none absolute inset-0 flex flex-col justify-between p-3 sm:p-4">
+              <div class="flex justify-end pointer-events-auto">
+                <a
+                  href="https://worldmonitor-sigma-flax.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 rounded-full border border-primary/35 bg-background/90 px-4 py-2 font-headline text-[10px] font-bold uppercase tracking-widest text-primary shadow-lg backdrop-blur-sm transition-colors hover:border-primary hover:bg-primary hover:text-on-primary"
+                >
+                  <span class="material-symbols-outlined text-[18px]" aria-hidden="true">open_in_full</span>
+                  Open full screen
+                </a>
               </div>
-              <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-primary/80 border border-primary/25 rounded-full px-3 py-1 bg-background/60 backdrop-blur-sm">Click anywhere</span>
             </div>
-          </a>
+          </div>
           <div class="px-4 sm:px-5 py-3.5 bg-surface-container-low border-t border-outline-variant/15 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-[10px] font-mono text-on-surface-variant/65 uppercase tracking-wider">
             <span>Upstream: <a class="text-primary/90 hover:text-primary no-underline hover:underline" href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener noreferrer">koala73/worldmonitor</a> — AGPL-3.0 / commercial terms from maintainer.</span>
-            <span class="text-on-surface-variant/45 normal-case tracking-normal">Preview from TRINETRA deck · Open via <a class="text-primary/90 hover:underline" href="deck.html">deck.html</a> or <a class="text-primary/90 hover:underline" href="https://worldmonitor-sigma-flax.vercel.app/" target="_blank" rel="noopener noreferrer">live URL</a>.</span>
+            <span class="text-on-surface-variant/45 normal-case tracking-normal">Live embed · <a class="text-primary/90 hover:underline" href="deck.html">deck.html</a> · <a class="text-primary/90 hover:underline" href="https://worldmonitor-sigma-flax.vercel.app/" target="_blank" rel="noopener noreferrer">direct</a></span>
           </div>
         </div>
 
@@ -666,14 +675,30 @@
           }
         });
         if (vid) {
+          vid.muted = true;
+          vid.setAttribute("playsinline", "");
+          vid.setAttribute("webkit-playsinline", "");
+          function tryPlay() {
+            var p = vid.play();
+            if (p && p.catch) p.catch(function () {});
+          }
           vid.addEventListener("ended", dismissIntro);
           vid.addEventListener("error", function () {
-            setTimeout(dismissIntro, 200);
+            setTimeout(dismissIntro, 600);
           });
-          var pp = vid.play();
-          if (pp && pp.catch) pp.catch(function () {
-            dismissIntro();
-          });
+          if (vid.readyState >= 2) {
+            tryPlay();
+          } else {
+            vid.addEventListener(
+              "canplay",
+              function onCan() {
+                vid.removeEventListener("canplay", onCan);
+                tryPlay();
+              },
+              { once: true }
+            );
+            vid.load();
+          }
         } else {
           dismissIntro();
         }
